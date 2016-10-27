@@ -35,25 +35,42 @@ var translator = function(number){
 
     for(var numIndex = length - 1; numIndex >= 0; numIndex--){
         counter = 0;
-        console.log("number Index: " + numIndex, "outPut Array: " + processArray, "numberArray: " + numberArray, "x: " + x);
         while(counter < numberArray[numIndex]){
             processArray.push(romanBase10[x]);
             counter++;
         }
       x += 1;
-    };
-    var reverse = processArray.reverse();
-    var outputArray = reverse.join("");
-    return outputArray;
-};
+    }
 
+    return processArray;
+}
+
+var specialCases = function(numeralArray){
+    var iCount = 0;
+    var vCount = 0;
+    var outputArray = [];
+
+    for(var index = 0; index < numeralArray.length; index++){
+      if(numeralArray[index] === 'I'){
+        iCount += 1;
+        console.log(iCount);
+        if(iCount === 5){
+          numeralArray.splice(0,5);
+          numeralArray.push('V');
+        }
+      }
+    }
+
+  return numeralArray;
+}
 
 
 $(document).ready(function(){
   $("#roman-numeral").submit(function(){
 
     var userInput = parseInt($("#user-input").val());
-    var output = translator(userInput);
+    var step1 = translator(userInput);
+    var output = specialCases(step1);
     console.log(output);
     event.preventDefault();
   });
