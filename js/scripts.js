@@ -20,27 +20,32 @@ var valueCheck = function(number){
 
 var translator = function(number){
 
-    var romanArray = ['I','X','C','D','M'];
-    // var numericalArry = ['1', '10', '100', '1000'];
+    var romanBase10 = ['I','X','C','M'];
     var tempString = number.toString();
     var tempArray = tempString.split("");
-    var outputArray = [];
+    var processArray = [];
     var counter;
 
-    numberArray = tempArray.map(function(num){
+    var numberArray = tempArray.map(function(num){
       return parseInt(num);
     });
 
     var length = numberArray.length;
-    for(var numIndex = length; numIndex >= 0; numIndex--){
-        while(counter < numberArray[numIndex]){
-          outputArray.push(romanArray[romanIndex]);
-          counter++;
-        }
-    }
+    var x = 0;
 
+    for(var numIndex = length - 1; numIndex >= 0; numIndex--){
+        counter = 0;
+        console.log("number Index: " + numIndex, "outPut Array: " + processArray, "numberArray: " + numberArray, "x: " + x);
+        while(counter < numberArray[numIndex]){
+            processArray.push(romanBase10[x]);
+            counter++;
+        }
+      x += 1;
+    };
+    var reverse = processArray.reverse();
+    var outputArray = reverse.join("");
     return outputArray;
-}
+};
 
 
 
